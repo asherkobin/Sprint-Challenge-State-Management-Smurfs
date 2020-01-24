@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect as connectToRedux } from "react-redux";
 import "./App.css";
-import { getSmurfsInfo, addSmurfInfo } from "../actions/smurfsActions";
+import { getSmurfsInfo, addSmurfInfo, removeSmurfById } from "../actions/smurfsActions";
 
 const App = (props) => {
   const handleSubmit = e => {
@@ -16,7 +16,7 @@ const App = (props) => {
 
   useEffect(() => {
     props.getSmurfsInfo();
-  }, []);
+  }, []); // run-once on load
 
   const smurfStyle = {
     border: "1px solid blue",
@@ -33,12 +33,12 @@ const App = (props) => {
             <div>Name: {smurfInfo.name}</div>
             <div>Age: {smurfInfo.age}</div>
             <div>Height: {smurfInfo.height}</div>
-            <div></div>
+            <div><button onClick={() => props.removeSmurfById(smurfInfo.id)}>Euthanize</button></div>
           </div>)
       }
       </div>
       <hr />
-      <form>
+      <form style={{ border: "1px solid blue", margin: "10px", padding: "10px", width: "200px" }}>
         <div>
           <label htmlFor="smurfName">Name: </label>
           <input type="text" id="smurfName" />
@@ -64,4 +64,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connectToRedux(mapStateToProps, { getSmurfsInfo, addSmurfInfo })(App);
+export default connectToRedux(mapStateToProps, { getSmurfsInfo, addSmurfInfo, removeSmurfById })(App);

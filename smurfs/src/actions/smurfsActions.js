@@ -20,6 +20,22 @@ export const addSmurfInfo = (smurfInfo) => {
     Axios
       .post("http://localhost:3333/smurfs", smurfInfo)
       .then(res => {
+        dispatch({ type: "ADD_SMURF_INFO_SUCCESS" });
+        dispatch({ type: "GET_SMURFS_INFO_SUCCESS", payload: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+};
+
+export const removeSmurfById = (smurfId) => {
+  return dispatch => {
+    dispatch({ type: "REMOVE_SMURF_BYID_START" });
+    Axios
+      .delete("http://localhost:3333/smurfs/" + smurfId)
+      .then(res => {
+        dispatch({ type: "REMOVE_SMURF_BYID_SUCCESS" });
         dispatch({ type: "GET_SMURFS_INFO_SUCCESS", payload: res.data });
       })
       .catch(err => {

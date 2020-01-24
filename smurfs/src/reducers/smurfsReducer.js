@@ -13,6 +13,10 @@ export const smurfsReducer = (state = initialState, action) => {
       return { ...state, isLoading: true }
     case "ADD_SMURF_INFO_SUCCESS":
         return { ...state, isLoading: false, smurfInfo: action.payload };
+    case "REMOVE_SMURF_BYID_START":
+      return { ...state, isLoading: true }
+    case "REMOVE_SMURF_BYID_SUCCESS":
+        return { ...state, isLoading: false, smurfId: action.payload };
     default:
       return state;
   }
